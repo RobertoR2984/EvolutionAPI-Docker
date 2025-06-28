@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
@@ -38,4 +39,3 @@ app.post('/webhook', express.json(), (req, res) => {
   console.log('📩 Recibido desde n8n:', req.body);
   res.status(200).json({ recibido: true });
 });
-
