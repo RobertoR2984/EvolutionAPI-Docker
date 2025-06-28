@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // ✅ Ruta raíz con JSON requerido por EvolutionAPI Cloud
 app.get("/", (req, res) => {
   res.json({
-    status: "success",
+    status: true,
     message: "Servidor EvolutionAPI activo",
     version: "1.8.7",
     author: "Roberto Rabilero"
