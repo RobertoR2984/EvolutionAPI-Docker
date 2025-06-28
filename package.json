@@ -12,7 +12,6 @@
     "express": "^4.21.2"
   }
 }
-=======
 {
   "name": "evolution-api",
   "version": "1.0.0",
@@ -23,7 +22,6 @@
   },
   "dependencies": {
     "dotenv": "^17.0.0",
-    "express": "^4.21.2"
+      "express": "^4.21.2"
   }
-}
->>>>>>> 3d4cf5ac6d9cae892cae77de27e438c1359ddc27
+} 
