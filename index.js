@@ -2,34 +2,44 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const app = express();
-// Sirve archivos estáticos desde la carpeta "public"
+
+// Sirve archivos estáticos desde carpeta "public"
 app.use(express.static(path.join(__dirname, "public")));
-// Ruta principal "/"
+
+// ✅ Ruta raíz que responde con JSON (requerido por EvolutionAPI Cloud)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.json({
+    status: "ok",
+    message: "Servidor listo para EvolutionAPI"
+  });
 });
-// Ruta "/manager" que muestra lo mismo que "/"
+
+// 🔁 Ruta /manager que muestra el panel HTML
 app.get("/manager", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Configura el puerto y levanta el servidor
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
-});
-// Nueva ruta "/status" para comprobar si está activa
-app.get('/status', (req, res) => {
+// 🔍 Ruta /status que devuelve confirmación de estado
+app.get("/status", (req, res) => {
   res.json({
-    status: '✅ Activa',
-    fecha: new Date().toLocaleString(),
+    status: "✅ Activa",
+    fecha: new Date().toLocaleString()
   });
 });
-// Nueva ruta "/evolucion" que responde texto simple
-app.get('/evolucion', (req, res) => {
-  res.send('🚀 Esta es la ruta /evolucion funcionando correctamente.');
+
+// 💬 Ruta /evolucion que responde con texto plano
+app.get("/evolucion", (req, res) => {
+  res.send("Esta es la ruta /evolucion funcionando correctamente.");
 });
-app.post('/webhook', express.json(), (req, res) => {
-  console.log('📩 Recibido desde n8n:', req.body);
+
+// 📬 Ruta /webhook que recibe peticiones POST desde n8n
+app.post("/webhook", express.json(), (req, res) => {
+  console.log("📥 Recibido desde n8n:", req.body);
   res.status(200).json({ recibido: true });
+});
+
+// 🚀 Puerto y servidor activo
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`🌐 Servidor corriendo en el puerto ${PORT}`);
 });
