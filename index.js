@@ -6,20 +6,22 @@ const app = express();
 // Sirve archivos estáticos desde carpeta "public"
 app.use(express.static(path.join(__dirname, "public")));
 
-// ✅ Ruta raíz que responde con JSON (requerido por EvolutionAPI Cloud)
+// ✅ Ruta raíz con JSON requerido por EvolutionAPI Cloud
 app.get("/", (req, res) => {
   res.json({
-    status: "ok",
-    message: "Servidor listo para EvolutionAPI"
+    status: "success",
+    message: "Servidor EvolutionAPI activo",
+    version: "1.8.7",
+    author: "Roberto Rabilero"
   });
 });
 
-// 🔁 Ruta /manager que muestra el panel HTML
+// Ruta /manager que muestra el panel HTML
 app.get("/manager", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// 🔍 Ruta /status que devuelve confirmación de estado
+// Ruta /status que devuelve confirmación de estado
 app.get("/status", (req, res) => {
   res.json({
     status: "✅ Activa",
@@ -27,19 +29,20 @@ app.get("/status", (req, res) => {
   });
 });
 
-// 💬 Ruta /evolucion que responde con texto plano
+// Ruta /evolucion que responde con texto plano
 app.get("/evolucion", (req, res) => {
   res.send("Esta es la ruta /evolucion funcionando correctamente.");
 });
 
-// 📬 Ruta /webhook que recibe peticiones POST desde n8n
+// Ruta /webhook que recibe peticiones POST desde n8n
 app.post("/webhook", express.json(), (req, res) => {
-  console.log("📥 Recibido desde n8n:", req.body);
+  console.log("📩 Recibido desde n8n:", req.body);
   res.status(200).json({ recibido: true });
 });
 
-// 🚀 Puerto y servidor activo
+// Puerto y servidor activo
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🌐 Servidor corriendo en el puerto ${PORT}`);
 });
+
