@@ -10,8 +10,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.json({
     status: true,
-    message: message: "¡Sí, funciona!"
-
+    message: "¡Si! funciona!",
     version: "1.8.7",
     author: "Roberto Rabilero"
   });
