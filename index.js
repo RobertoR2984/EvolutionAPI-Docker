@@ -10,7 +10,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.json({
     status: true,
-    message: "Servidor EvolutionAPI activo",
+    message: message: "¡Sí, funciona!"
+
     version: "1.8.7",
     author: "Roberto Rabilero"
   });
